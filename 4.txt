@@ -1,0 +1,37 @@
+CREATE DATABASE pokemon;
+
+CREATE TABLE pokemon_tb
+(id INT(11) PRIMARY KEY  AUTO INCREMENT,
+name VARCHAR(50) NOT NULL,
+str VARCHAR(20) NOT NULL,
+def VARCHAR(20) NOT NULL,
+photo VARCHAR(200), NOT NULL );
+
+CREATE TABLE  pokemon_go 
+(id INT(11) PRIMARY KEY AUTO INCREMENT,
+pokemon_id INT(11) NOT NULL,
+elemen_id INT(11) NOT NULL );
+
+CREATE TABLE element_tb
+(id INT(11) PRIMARY KEY AUTO INCREMENT,
+name VARCHAR(50) NOT NULL);
+
+
+
+
+//menampilkan seluruh data pokemon
+SELECT * FROM pokemon_go;
+
+
+
+// menampilkan seluruh data pokemon dengan element tertentu
+SELECT pokemon_go.pokemon_id, pokemon_go.elemen_id, element_tb.name, pokemon_tb.name, pokemon_tb.str, pokemon_tb.def, 
+pokemon_tb.photo
+FROM pokemon_tb INNER JOIN (element_tb INNER JOIN pokemon_go ON element_tb.id = pokemon_go.elemen_id )
+ON pokemon_tb.id = pokemon_go.pokemon_id WHERE element_tb.name = 'Fire';
+
+//menampilkan seluruh data pokemon dengan element
+SELECT pokemon_go.pokemon_id, pokemon_go.elemen_id, element_tb.name, pokemon_tb.name, pokemon_tb.str, pokemon_tb.def, 
+pokemon_tb.photo
+FROM pokemon_tb INNER JOIN (element_tb INNER JOIN pokemon_go ON element_tb.id = pokemon_go.elemen_id )
+ON pokemon_tb.id = pokemon_go.pokemon_id;
